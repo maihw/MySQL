@@ -21,7 +21,7 @@ class Course(Base):
     __tablename__ = 'course'
     id = Column(Integer, primary_key=True)
     name = Column(String(64))
-    user_id = Column(Integer, ForeignKey('user.id', ondelete='Cascade'))
+    user_id = Column(Integer, ForeignKey('user.id', ondelete='CASCADE'))
     user = relationship('User',
             backref=backerf('course',casecade='all,delete-rophan'))
     def __repr__(self):
