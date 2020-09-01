@@ -3,6 +3,7 @@
 from sqlalchemy.orm import sessionmaker
 from faker import Faker
 from db import Base, engine, User, Course
+from db import Lab, Tag
 
 session = sessionmaker(engine)()
 fake = Faker('zh-cn')
@@ -33,6 +34,16 @@ def main():
     create_courses()
     # ?? session ? commit ?????????????????
     session.commit()
+
+def create_labs():
+    for course in session.query(Course):
+        lab = Lab(name=''.join(fake.words(5)), id=course.id)
+        session.add(lab)
+
+def create_tags():
+    for name in ['python', 'linux', 'java', 'mysql', 'lisp']:
+        tag = Tag(name=name)
+        session.add(tag)
 
 if __name__ == '__main__':
     main()
